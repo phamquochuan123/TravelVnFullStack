@@ -1,0 +1,58 @@
+services:
+
+  # ─── MySQL ───────────────────────────────────────────────
+  db:
+    image: mysql:8.0
+    container_name: travel_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: travelmanager
+    ports:
+      - "3307:3306"   # 3307 tránh xung đột MySQL local
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── Spring Boot ─────────────────────────────────────────
+  backend:
+    build:
+      context: ./travel
+      dockerfile: Dockerfile
+    container_name: travel_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # Override datasource URL để dùng service name 'db' thay vì localhost
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/travelmanager?useSSL=false&allowPublicKeyRetrieval=true
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      VNPAY_TMN_CODE: ${VNPAY_TMN_CODE}
+      VNPAY_HASH_SECRET: ${VNPAY_HASH_SECRET}
+      VNPAY_RETURN_URL: ${VNPAY_RETURN_URL}
+    ports:
+      - "8080:8080"
+
+  # ─── React Frontend ──────────────────────────────────────
+  frontend:
+    build:
+      context: "./react travel manager"
+      dockerfile: Dockerfile
+    container_name: travel_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  mysql_data:
