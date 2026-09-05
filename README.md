@@ -1,7 +1,5 @@
 # Travel Manager — hướng dẫn chạy và công khai link
 
-## ⚠️ Trước tiên: m đang dùng cmd hay PowerShell?
-
 Nhìn dấu nhắc lệnh:
 
 - `D:\springjava\travel>` → **cmd.exe**
