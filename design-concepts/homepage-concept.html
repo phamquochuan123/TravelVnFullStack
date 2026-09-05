@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TravelVN — Concept trang chủ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400..800;1,400..600&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────────────────────
+   TravelVN — concept trang chủ
+   Bảng màu lấy từ sơn mài Việt: nền then đen ngả nâu, giấy điệp,
+   vàng quỳ. Chữ: Petrona (hiển thị) + Be Vietnam Pro (nội dung).
+   ───────────────────────────────────────────────────────────── */
+
+:root{
+  /* sơn mài */
+  --lac-900: oklch(0.145 0.018 48);
+  --lac-850: oklch(0.172 0.020 47);
+  --lac-800: oklch(0.205 0.022 46);
+  --lac-700: oklch(0.272 0.024 45);
+  --lac-600: oklch(0.355 0.022 46);
+
+  /* giấy điệp */
+  --paper:   oklch(0.958 0.011 84);
+  --paper-2: oklch(0.928 0.014 80);
+  --paper-3: oklch(0.888 0.017 78);
+
+  --ink:      oklch(0.245 0.021 46);
+  --ink-soft: oklch(0.442 0.018 48);
+  --ink-mute: oklch(0.575 0.015 50);
+
+  /* vàng quỳ */
+  --gold:      oklch(0.722 0.132 64);
+  --gold-warm: oklch(0.660 0.145 58);
+  --gold-ink:  oklch(0.448 0.112 50);   /* đủ tương phản cho chữ nhỏ trên giấy */
+  --celadon:   oklch(0.605 0.055 168);
+
+  --line-paper: oklch(0.845 0.016 76);
+  --line-lac:   oklch(0.315 0.020 46);
+
+  --serif: 'Petrona', 'Times New Roman', Georgia, serif;
+  --sans: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --ease: cubic-bezier(.16,1,.3,1);
+  --gut: clamp(1.25rem, 4.5vw, 4.5rem);
+  --max: 1400px;
+
+  /* thang chữ, tỉ lệ ~1.28 */
+  --t-xs: .8125rem;
+  --t-sm: .9375rem;
+  --t-base: clamp(1rem, .96rem + .18vw, 1.0625rem);
+  --t-lg: clamp(1.125rem, 1.05rem + .35vw, 1.3125rem);
+  --t-xl: clamp(1.45rem, 1.25rem + .9vw, 2rem);
+  --t-2xl: clamp(2rem, 1.55rem + 2.1vw, 3.25rem);
+  --t-3xl: clamp(2.6rem, 1.8rem + 3.6vw, 5rem);
+  --t-4xl: clamp(3.1rem, 1.9rem + 5.4vw, 7rem);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:var(--t-base); font-weight:400;
+  line-height:1.62; -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{ display:block; max-width:100%; }
+a{ color:inherit; }
+button{ font:inherit; color:inherit; }
+
+:focus-visible{ outline:2px solid var(--gold-warm); outline-offset:3px; border-radius:1px; }
+.dark :focus-visible{ outline-color:var(--gold); }
+
+.wrap{ max-width:var(--max); margin-inline:auto; padding-inline:var(--gut); }
+.dark{ background:var(--lac-900); color:var(--paper); }
+
+h1,h2,h3{ font-family:var(--serif); font-weight:600; line-height:1.04;
+  letter-spacing:-.018em; margin:0; text-wrap:balance; }
+p{ margin:0; }
+.lede{ font-size:var(--t-lg); line-height:1.55; color:var(--ink-soft);
+  max-width:44ch; font-weight:300; }
+.dark .lede{ color:oklch(0.80 0.014 70); }
+
+/* ── nút ─────────────────────────────────────────── */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.6em;
+  min-height:52px; padding:0 1.7rem; border:1px solid transparent; border-radius:2px;
+  font-size:var(--t-sm); font-weight:600; letter-spacing:.005em;
+  text-decoration:none; cursor:pointer; white-space:nowrap;
+  transition:background .5s var(--ease), color .5s var(--ease),
+             border-color .5s var(--ease), transform .5s var(--ease);
+}
+.btn--gold{ background:var(--gold-warm); color:var(--lac-900); }
+.btn--gold:hover{ background:var(--gold); transform:translateY(-2px); }
+.btn--ghost{ border-color:var(--line-lac); color:var(--paper); }
+.btn--ghost:hover{ border-color:var(--gold); color:var(--gold); }
+.btn--ink{ border-color:var(--ink); color:var(--ink); }
+.btn--ink:hover{ background:var(--ink); color:var(--paper); }
+
+/* liên kết gạch chân chạy */
+.ulink{
+  display:inline-flex; align-items:center; gap:.55em; min-height:44px;
+  font-size:var(--t-sm); font-weight:600; text-decoration:none;
+  color:var(--gold-ink); padding-block:.35em;
+  background-image:linear-gradient(currentColor,currentColor);
+  background-size:0% 1px; background-position:0 100%; background-repeat:no-repeat;
+  transition:background-size .55s var(--ease);
+}
+.ulink:hover{ background-size:100% 1px; }
+.ulink .arw{ transition:transform .5s var(--ease); }
+.ulink:hover .arw{ transform:translateX(4px); }
+.dark .ulink{ color:var(--gold); }
+
+/* ── khung ảnh ────────────────────────────────────── */
+.frame{ position:relative; overflow:hidden; background:var(--paper-3); }
+.frame img{ width:100%; height:100%; object-fit:cover;
+  transition:transform 1.4s var(--ease); }
+.frame--hov:hover img,
+a:hover > .frame img{ transform:scale(1.045); }
+.cap{ margin-top:.85rem; font-size:var(--t-xs); color:var(--ink-mute);
+  display:flex; align-items:center; gap:.6em; }
+.cap::before{ content:""; width:22px; height:1px; background:var(--gold-warm); flex:none; }
+.dark .cap{ color:oklch(0.68 0.015 65); }
+
+/* ── đầu mục chương ───────────────────────────────── */
+.chapter{ display:flex; align-items:baseline; gap:.9rem; margin-bottom:1.6rem; }
+.chapter__num{ font-family:var(--serif); font-size:1.35rem; font-weight:500;
+  color:var(--gold-ink); font-variant-numeric:lining-nums; }
+.chapter__rule{ flex:none; width:clamp(28px,6vw,72px); height:1px;
+  background:var(--line-paper); align-self:center; }
+.chapter__name{ font-size:var(--t-sm); font-weight:500; color:var(--ink-soft); }
+.dark .chapter__num{ color:var(--gold); }
+.dark .chapter__rule{ background:var(--line-lac); }
+.dark .chapter__name{ color:oklch(0.75 0.015 68); }
+
+/* ═══ ĐIỀU HƯỚNG ═══════════════════════════════════ */
+.nav{
+  position:fixed; inset:0 0 auto; z-index:80;
+  padding-block:1.05rem;
+  transition:background .6s var(--ease), padding .6s var(--ease),
+             border-color .6s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.is-stuck{
+  background:oklch(0.145 0.018 48 / .93);
+  backdrop-filter:saturate(150%) blur(14px);
+  border-bottom-color:var(--line-lac);
+  padding-block:.7rem;
+}
+.nav__in{ display:flex; align-items:center; gap:clamp(1rem,3vw,2.8rem); }
+.mark{ display:inline-flex; align-items:baseline; padding-block:4px; text-decoration:none;
+  font-family:var(--serif); font-size:1.4rem; font-weight:600;
+  letter-spacing:-.02em; color:var(--paper); }
+.mark span{ color:var(--gold); }
+.mark::after{ content:""; width:5px; height:5px; background:var(--gold);
+  border-radius:50%; margin-left:.3rem; transform:translateY(-.62em); }
+
+.nav__links{ display:flex; gap:clamp(.9rem,2vw,2rem); margin-left:auto; }
+.nav__links a{
+  position:relative; text-decoration:none; font-size:var(--t-sm); font-weight:500;
+  color:oklch(0.86 0.012 70); padding-block:.4rem;
+  transition:color .4s var(--ease);
+}
+.nav__links a::after{
+  content:""; position:absolute; left:0; bottom:0; height:1px; width:100%;
+  background:var(--gold); transform:scaleX(0); transform-origin:right;
+  transition:transform .55s var(--ease);
+}
+.nav__links a:hover{ color:var(--paper); }
+.nav__links a:hover::after{ transform:scaleX(1); transform-origin:left; }
+
+.nav__act{ display:flex; align-items:center; gap:.75rem; }
+.nav__act .btn{ min-height:44px; padding:0 1.15rem; font-size:var(--t-xs); }
+.nav__login{ display:inline-flex; align-items:center; min-height:44px;
+  font-size:var(--t-sm); font-weight:500; text-decoration:none;
+  color:oklch(0.86 0.012 70); transition:color .4s var(--ease); }
+.nav__login:hover{ color:var(--gold); }
+
+.burger{ display:none; width:44px; height:44px; background:none; border:0;
+  cursor:pointer; padding:0; margin-left:auto; }
+.burger i{ display:block; width:20px; height:1.5px; background:var(--paper);
+  margin:4.5px auto; transition:transform .4s var(--ease), opacity .3s; }
+
+/* ═══ HERO ═════════════════════════════════════════ */
+.hero{ position:relative; background:var(--lac-900); color:var(--paper);
+  padding-top:clamp(7rem,13vh,10rem); padding-bottom:clamp(3rem,7vh,5.5rem);
+  overflow:hidden; }
+.hero::after{ /* vệt vàng mờ ở mép trên phải */
+  content:""; position:absolute; top:-30%; right:-10%; width:60%; height:80%;
+  background:radial-gradient(ellipse at center, oklch(0.66 0.145 58 / .13), transparent 65%);
+  pointer-events:none;
+}
+.hero__grid{ position:relative; display:grid; gap:clamp(2.5rem,5vw,4rem);
+  grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr); align-items:end; }
+
+.hero__eyebrow{ display:flex; align-items:center; gap:.7rem; margin-bottom:1.5rem;
+  font-size:var(--t-xs); color:oklch(0.74 0.016 68); }
+.hero__eyebrow b{ font-weight:500; color:var(--gold); }
+.hero__eyebrow::before{ content:""; width:26px; height:1px; background:var(--gold); }
+
+.hero h1{ font-size:var(--t-4xl); font-weight:600; line-height:.98;
+  letter-spacing:-.032em; margin-bottom:1.6rem; }
+.hero h1 em{ font-style:italic; font-weight:500; color:var(--gold); }
+
+.hero__lede{ font-size:var(--t-lg); font-weight:300; line-height:1.55;
+  color:oklch(0.82 0.014 70); max-width:41ch; }
+
+.hero__note{ margin-top:1.7rem; font-size:var(--t-xs); color:oklch(0.68 0.015 65);
+  display:flex; flex-wrap:wrap; gap:.5rem 1.1rem; }
+.hero__note span{ display:flex; align-items:center; gap:.45em; }
+.hero__note b{ color:var(--paper); font-weight:600; }
+.dot{ width:3px; height:3px; border-radius:50%; background:var(--gold); flex:none; }
+
+/* ảnh hero: dọc, tràn mép phải, có ảnh phụ chèn lệch */
+.hero__art{ position:relative; }
+.hero__art .frame--main{ aspect-ratio:3/3.9; }
+.hero__art .frame--inset{
+  position:absolute; left:-14%; bottom:-9%; width:46%; aspect-ratio:4/3;
+  border:6px solid var(--lac-900); background:var(--lac-800);
+}
+.hero__artcap{ position:absolute; top:1.1rem; left:-11%;
+  writing-mode:vertical-rl; font-size:var(--t-xs); letter-spacing:.02em;
+  color:oklch(0.72 0.016 66); display:flex; align-items:center; gap:.7em; }
+.hero__artcap::before{ content:""; width:1px; height:34px; background:var(--gold-warm); }
+
+/* thanh tìm kiếm — phá lưới, tràn rộng hơn cột chữ */
+.search{
+  position:relative; z-index:2; margin-top:clamp(2.5rem,5vw,3.75rem);
+  background:var(--paper); color:var(--ink); border-radius:2px;
+  display:grid; grid-template-columns:1.35fr 1fr .85fr auto; align-items:stretch;
+  box-shadow:0 1px 0 oklch(0.66 0.145 58 / .5);
+}
+.search__f{ position:relative; padding:1rem 1.35rem; border-right:1px solid var(--line-paper);
+  display:flex; flex-direction:column; gap:.18rem; min-width:0; }
+.search__f:last-of-type{ border-right:0; }
+.search__f label{ font-size:var(--t-xs); font-weight:600; color:var(--ink-soft); }
+.search__f input{
+  border:0; background:none; padding:0; font:inherit; font-size:var(--t-sm);
+  color:var(--ink); width:100%; min-width:0;
+}
+.search__f input::placeholder{ color:var(--ink-mute); }
+.search__f::after{ content:""; position:absolute; left:1.35rem; right:1.35rem; bottom:.7rem;
+  height:1px; background:var(--gold-warm); transform:scaleX(0); transform-origin:left;
+  transition:transform .55s var(--ease); }
+.search__f:focus-within::after{ transform:scaleX(1); }
+.search__go{ margin:.55rem; border:0; border-radius:2px; cursor:pointer;
+  background:var(--lac-900); color:var(--paper); padding:0 1.9rem;
+  font-size:var(--t-sm); font-weight:600; display:flex; align-items:center; gap:.6em;
+  transition:background .5s var(--ease); }
+.search__go:hover{ background:var(--gold-warm); color:var(--lac-900); }
+
+/* ═══ KHỐI CHUNG ═══════════════════════════════════ */
+.sec{ padding-block:clamp(4.5rem,10vw,8.5rem); }
+.sec__head{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:clamp(1.5rem,4vw,3.5rem); align-items:end; margin-bottom:clamp(2.5rem,5vw,4rem); }
+.sec__head h2{ font-size:var(--t-2xl); }
+.sec__head .side{ padding-bottom:.4rem; }
+
+/* ═══ 01 ĐIỂM ĐẾN — khảm lệch ══════════════════════ */
+.mosaic{ display:grid; grid-template-columns:repeat(12,1fr);
+  gap:clamp(1.25rem,2.6vw,2.5rem) clamp(1.25rem,2.4vw,2.25rem); }
+.dest{ text-decoration:none; display:block; }
+.dest .frame{ margin-bottom:1.1rem; }
+.dest h3{ font-size:var(--t-xl); font-weight:600; }
+.dest .meta{ margin-top:.5rem; font-size:var(--t-sm); color:var(--ink-soft); }
+.dest .prov{ font-size:var(--t-xs); color:var(--gold-ink); font-weight:600;
+  margin-bottom:.5rem; }
+
+.d1{ grid-column:1 / span 7; }             .d1 .frame{ aspect-ratio:16/11; }
+.d2{ grid-column:8 / span 5; align-self:end; } .d2 .frame{ aspect-ratio:4/5; }
+.d3{ grid-column:1 / span 4; margin-top:clamp(0rem,3vw,3rem); } .d3 .frame{ aspect-ratio:4/5; }
+.d4{ grid-column:6 / span 7; margin-top:clamp(0rem,-2vw,0rem); } .d4 .frame{ aspect-ratio:16/10; }
+
+.mosaic__more{ grid-column:1 / -1; display:flex; justify-content:flex-end;
+  padding-top:.5rem; }
+
+/* ═══ DẢI ẢNH TRÀN ═════════════════════════════════ */
+.band{ position:relative; min-height:clamp(360px,52vh,540px);
+  display:grid; align-items:center; overflow:hidden; background:var(--lac-900); }
+.band img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:.62; }
+.band::after{ content:""; position:absolute; inset:0;
+  background:linear-gradient(100deg, oklch(0.145 0.018 48 / .92) 0%,
+    oklch(0.145 0.018 48 / .55) 45%, oklch(0.145 0.018 48 / .2) 100%); }
+.band__in{ position:relative; z-index:2; }
+.band p{ font-family:var(--serif); font-size:var(--t-2xl); font-weight:500;
+  line-height:1.14; letter-spacing:-.02em; color:var(--paper); max-width:19ch; }
+.band p em{ font-style:italic; color:var(--gold); }
+.band small{ display:block; margin-top:1.4rem; font-family:var(--sans);
+  font-size:var(--t-sm); color:oklch(0.78 0.015 68); max-width:38ch; }
+
+/* ═══ 02 TOUR — hàng biên tập ══════════════════════ */
+.tour{ display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(1.5rem,4vw,3.5rem); align-items:center;
+  padding-block:clamp(2.25rem,4.5vw,3.5rem); border-top:1px solid var(--line-paper); }
+.tour:last-of-type{ border-bottom:1px solid var(--line-paper); }
+.tour--flip .tour__art{ order:2; }
+.tour__art{ aspect-ratio:4/3; }
+.tour__code{ font-size:var(--t-xs); font-weight:600; color:var(--gold-ink);
+  display:flex; align-items:center; gap:.7em; margin-bottom:.85rem; }
+.tour__code s{ text-decoration:none; color:var(--ink-mute); font-weight:400; }
+.tour h3{ font-size:var(--t-2xl); margin-bottom:.75rem; }
+.tour__desc{ color:var(--ink-soft); max-width:52ch; font-weight:300; }
+.tour__pts{ list-style:none; margin:1.15rem 0 0; padding:0;
+  display:flex; flex-wrap:wrap; gap:.5rem .5rem; }
+.tour__pts li{ font-size:var(--t-xs); color:var(--ink-soft);
+  border:1px solid var(--line-paper); padding:.4em .85em; border-radius:2px; }
+.tour__foot{ display:flex; flex-wrap:wrap; align-items:flex-end; gap:1.25rem 2rem;
+  margin-top:1.75rem; }
+.price{ display:flex; flex-direction:column; }
+.price b{ font-family:var(--serif); font-size:var(--t-xl); font-weight:600;
+  letter-spacing:-.02em; line-height:1; }
+.price small{ font-size:var(--t-xs); color:var(--ink-mute); margin-top:.4rem; }
+.seats{ font-size:var(--t-xs); color:var(--gold-ink); font-weight:600; }
+.tour__foot .btn{ margin-left:auto; }
+
+/* ═══ 03 LƯU TRÚ ═══════════════════════════════════ */
+.stay{ display:grid; grid-template-columns:repeat(12,1fr);
+  gap:clamp(1.5rem,3vw,2.75rem); }
+.stay__lead,.stay__second{ text-decoration:none; display:block; }
+.stay__lead{ grid-column:1 / span 7; }
+.stay__lead .frame{ aspect-ratio:16/11; margin-bottom:1.35rem; }
+.stay__second{ grid-column:8 / span 5; align-self:end; }
+.stay__second .frame{ aspect-ratio:5/4; margin-bottom:1.35rem; }
+.stay h3{ font-size:var(--t-xl); margin-bottom:.4rem;
+  transition:color .45s var(--ease); }
+.stay__lead:hover h3,.stay__second:hover h3{ color:var(--gold-ink); }
+.stay__meta{ font-size:var(--t-sm); color:var(--ink-soft); }
+.stay__price{ margin-top:.7rem; font-size:var(--t-sm); }
+.stay__price b{ font-family:var(--serif); font-size:var(--t-lg); font-weight:600; }
+
+.stay__list{ grid-column:1 / -1; margin-top:clamp(1rem,2.5vw,2rem);
+  border-top:1px solid var(--line-paper); }
+/* cột giá dùng minmax(max-content,1fr): ở ~834px cột 1fr co còn 127px trong khi
+   "5.900.000₫ / đêm" cần 139px, mà .row__price là nowrap nên chữ đè sang cột kế. */
+.row{ display:grid; grid-template-columns:minmax(0,2.2fr) minmax(0,1.4fr) minmax(max-content,1fr) auto;
+  gap:1rem 1.5rem; align-items:center; padding-block:1.2rem;
+  border-bottom:1px solid var(--line-paper); text-decoration:none;
+  transition:background .45s var(--ease); }
+.row:hover{ background:var(--paper-2); }
+.row__name{ font-family:var(--serif); font-size:var(--t-lg); font-weight:600; }
+.row__sub{ font-size:var(--t-sm); color:var(--ink-soft); }
+.row__price{ font-size:var(--t-sm); font-weight:600; white-space:nowrap; }
+.row__go{ font-size:var(--t-xs); color:var(--gold-ink); font-weight:600;
+  transition:transform .5s var(--ease); }
+.row:hover .row__go{ transform:translateX(4px); }
+
+/* ═══ 04 ẨM THỰC — dải tối ═════════════════════════ */
+.dine{ display:grid; grid-template-columns:repeat(12,1fr);
+  gap:clamp(1.5rem,3.5vw,3rem); align-items:start; }
+.dine__tall{ grid-column:1 / span 4; }
+.dine__tall .frame{ aspect-ratio:3/4.1; }
+.dine__body{ grid-column:5 / span 8; }
+.dine__sq{ width:min(340px,55%); margin-bottom:2rem; }
+.dine__sq .frame{ aspect-ratio:4/3; }
+.dine .row{ border-bottom-color:var(--line-lac);
+  grid-template-columns:minmax(0,1.75fr) minmax(0,1.5fr) auto auto; }
+.dine .row:hover{ background:var(--lac-850); }
+.dine .row__sub{ color:oklch(0.72 0.015 66); }
+.dine .row__go{ color:var(--gold); }
+.dine__list{ border-top:1px solid var(--line-lac); margin-top:1.75rem; }
+
+/* ═══ KHÁCH KỂ LẠI ═════════════════════════════════ */
+.voices{ display:grid; grid-template-columns:repeat(12,1fr);
+  gap:clamp(1.75rem,4vw,3.25rem); align-items:start; }
+.voices__art{ grid-column:1 / span 4; }
+.voices__art .frame{ aspect-ratio:4/5; }
+.voices__lead{ grid-column:6 / span 7; }
+.quote{ font-family:var(--serif); font-size:var(--t-xl); font-weight:400;
+  font-style:italic; line-height:1.34; letter-spacing:-.012em; color:var(--ink); }
+.quote--big{ font-size:var(--t-2xl); line-height:1.22; }
+.who{ display:flex; align-items:center; gap:.7rem; margin-top:1.4rem;
+  font-size:var(--t-sm); color:var(--ink-soft); }
+.who b{ color:var(--ink); font-weight:600; }
+.voices__pair{ grid-column:6 / span 7; display:grid;
+  grid-template-columns:1fr 1fr; gap:clamp(1.5rem,3vw,2.5rem);
+  margin-top:clamp(1.5rem,3vw,2.5rem); padding-top:clamp(1.5rem,3vw,2.5rem);
+  border-top:1px solid var(--line-paper); }
+.voices__pair .quote{ font-size:var(--t-base); font-style:normal;
+  font-family:var(--sans); font-weight:300; line-height:1.6; color:var(--ink-soft); }
+
+/* ═══ CTA CUỐI ═════════════════════════════════════ */
+.cta{ position:relative; overflow:hidden; padding-block:clamp(5rem,11vw,9rem); }
+.cta::before{ content:""; position:absolute; top:-40%; left:50%; width:70%; height:110%;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse at center, oklch(0.66 0.145 58 / .14), transparent 62%);
+  pointer-events:none; }
+.cta__in{ position:relative; z-index:2; text-align:center; }
+.cta h2{ font-size:var(--t-3xl); font-weight:600; letter-spacing:-.03em;
+  margin-inline:auto; max-width:16ch; }
+.cta h2 em{ font-style:italic; color:var(--gold); }
+.cta .lede{ margin:1.5rem auto 0; text-align:center; }
+.cta__btns{ display:flex; flex-wrap:wrap; gap:.85rem; justify-content:center;
+  margin-top:2.5rem; }
+.trust{ display:flex; flex-wrap:wrap; justify-content:center; gap:1rem 2.5rem;
+  margin-top:3.25rem; padding-top:2.25rem; border-top:1px solid var(--line-lac);
+  font-size:var(--t-xs); color:oklch(0.72 0.015 66); }
+.trust span{ display:flex; align-items:center; gap:.5em; }
+
+/* ═══ CHÂN TRANG ═══════════════════════════════════ */
+.foot{ background:var(--lac-850); color:oklch(0.78 0.015 68);
+  padding-block:clamp(3rem,6vw,4.5rem); font-size:var(--t-sm); }
+.foot__grid{ display:grid; grid-template-columns:1.6fr repeat(3,1fr);
+  gap:clamp(1.75rem,4vw,3rem); }
+.foot h4{ font-family:var(--sans); font-size:var(--t-xs); font-weight:600;
+  color:var(--paper); margin:0 0 1rem; }
+.foot ul{ list-style:none; margin:0; padding:0; display:grid; gap:.15rem; }
+/* link chân trang phải là khối có đệm dọc — inline thì hộp chạm chỉ cao 19px,
+   dưới ngưỡng 44px trên cảm ứng. 19 + .8rem×2 ≈ 44.6px. */
+.foot ul a{ display:block; padding-block:.8rem; }
+.foot a{ text-decoration:none; transition:color .4s var(--ease); }
+.foot a:hover{ color:var(--gold); }
+.foot__blurb{ max-width:34ch; margin-top:1.1rem; font-weight:300; line-height:1.6; }
+.foot__legal{ margin-top:clamp(2.25rem,5vw,3.5rem); padding-top:1.6rem;
+  border-top:1px solid var(--line-lac); display:flex; flex-wrap:wrap;
+  justify-content:space-between; gap:1rem; font-size:var(--t-xs);
+  color:oklch(0.62 0.015 62); }
+
+/* ═══ CHUYỂN ĐỘNG ══════════════════════════════════ */
+.rv{ opacity:0; transform:translateY(20px);
+  transition:opacity .95s var(--ease), transform .95s var(--ease);
+  transition-delay:var(--d,0ms); }
+.rv.is-in{ opacity:1; transform:none; }
+
+/* ═══ ĐÁP ỨNG ══════════════════════════════════════ */
+@media (max-width:1080px){
+  /* vùng chạm tối thiểu 44px trên thiết bị cảm ứng */
+  .search__f{ padding-block:.85rem; }
+  .search__f input{ min-height:44px; }
+  .search__f::after{ bottom:.5rem; }
+  .hero__grid{ grid-template-columns:1fr; align-items:start; }
+  .hero__art{ max-width:min(520px,86%); }
+  .hero__artcap{ display:none; }
+  .hero__art .frame--inset{ left:auto; right:-10%; bottom:-7%; width:42%; }
+  .search{ grid-template-columns:1fr 1fr; }
+  .search__f:nth-of-type(2){ border-right:0; }
+  .search__f:nth-of-type(3){ border-top:1px solid var(--line-paper); }
+  .search__go{ grid-column:1 / -1; padding-block:.95rem; justify-content:center; }
+  .sec__head{ grid-template-columns:1fr; }
+  .d1,.d2,.d3,.d4{ grid-column:1 / -1; margin-top:0; }
+  .d2 .frame,.d3 .frame{ aspect-ratio:16/11; }
+  .stay__lead,.stay__second{ grid-column:1 / -1; }
+  .dine__tall,.dine__body,.voices__art,.voices__lead,.voices__pair{ grid-column:1 / -1; }
+  .dine__tall .frame{ aspect-ratio:16/10; }
+  .voices__art .frame{ aspect-ratio:16/10; }
+  .foot__grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:760px){
+  .nav__links,.nav__act{ display:none; }
+  .burger{ display:block; }
+  .tour,.tour--flip{ grid-template-columns:1fr; }
+  .tour--flip .tour__art{ order:0; }
+  .row{ grid-template-columns:1fr auto; gap:.35rem 1rem; }
+  .row__sub{ grid-column:1 / -1; }
+  .row__price{ grid-column:1; }
+  .row__go{ grid-column:2; }
+  .voices__pair{ grid-template-columns:1fr; }
+  .search{ grid-template-columns:1fr; }
+  .search__f{ border-right:0; border-top:1px solid var(--line-paper); }
+  .search__f:first-of-type{ border-top:0; }
+  .foot__grid{ grid-template-columns:1fr; }
+  .tour__foot .btn{ margin-left:0; width:100%; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+  .rv{ opacity:1; transform:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ ĐIỀU HƯỚNG ══════════════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a class="mark" href="#">Travel<span>VN</span></a>
+    <nav class="nav__links" aria-label="Chính">
+      <a href="#diemden">Điểm đến</a>
+      <a href="#tour">Tour</a>
+      <a href="#luutru">Lưu trú</a>
+      <a href="#amthuc">Ẩm thực</a>
+      <a href="#khachnoi">Đánh giá</a>
+    </nav>
+    <div class="nav__act">
+      <a class="nav__login" href="#">Đăng nhập</a>
+      <a class="btn btn--gold" href="#dat">Đặt chuyến</a>
+    </div>
+    <button class="burger" aria-label="Mở menu" aria-expanded="false"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<main>
+
+<!-- ══ HERO ════════════════════════════════════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__grid">
+
+      <div class="hero__copy">
+        <p class="hero__eyebrow"><b>Lữ hành nội địa</b> · Tour, khách sạn &amp; nhà hàng</p>
+        <h1 class="rv">Cả chuyến đi,<br>đặt xong trong<br><em>một buổi tối.</em></h1>
+        <p class="hero__lede rv" style="--d:110ms">
+          Chọn tour, phòng và bàn ăn trong cùng một lần. Thanh toán VNPay,
+          xác nhận ngay. Không cần gọi điện, không chờ báo giá qua Zalo.
+        </p>
+        <p class="hero__note rv" style="--d:210ms">
+          <span><i class="dot"></i><b>4.218</b> chuyến đã khởi hành</span>
+          <span><i class="dot"></i>Hoàn <b>100%</b> nếu huỷ trước 7 ngày</span>
+        </p>
+      </div>
+
+      <div class="hero__art rv" style="--d:160ms">
+        <p class="hero__artcap">Thung lũng Đồng Văn, Hà Giang</p>
+        <div class="frame frame--main frame--hov">
+          <img src="images/hero-dongvan.jpg" alt="Thung lũng Đồng Văn nhìn từ trên cao, ruộng bậc thang ngả vàng ôm lấy dòng sông xanh giữa vách núi đá vôi Hà Giang." width="900" height="1348" fetchpriority="high">
+        </div>
+        <div class="frame frame--inset frame--hov">
+          <img src="images/hero-thuyen.jpg" alt="Một chiếc thuyền buồm gỗ neo lẻ loi giữa vịnh Hạ Long phủ sương sớm." width="600" height="400" loading="lazy">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- thanh tìm kiếm phá lưới -->
+    <form class="search rv" style="--d:280ms" onsubmit="return false">
+      <div class="search__f">
+        <label for="q-where">Điểm đến</label>
+        <input id="q-where" type="text" placeholder="Hà Giang, Hội An, Phú Quốc…" autocomplete="off">
+      </div>
+      <div class="search__f">
+        <label for="q-when">Ngày khởi hành</label>
+        <input id="q-when" type="text" placeholder="12/09 – 15/09" autocomplete="off">
+      </div>
+      <div class="search__f">
+        <label for="q-who">Số khách</label>
+        <input id="q-who" type="text" placeholder="2 người lớn" autocomplete="off">
+      </div>
+      <button class="search__go" type="submit">Tìm chuyến <span aria-hidden="true">→</span></button>
+    </form>
+  </div>
+</section>
+
+<!-- ══ 01 ĐIỂM ĐẾN ═════════════════════════════════ -->
+<section class="sec" id="diemden">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <div>
+        <p class="chapter"><span class="chapter__num">01</span><span class="chapter__rule"></span><span class="chapter__name">Điểm đến</span></p>
+        <h2>Chọn theo tâm trạng,<br>không phải theo giá.</h2>
+      </div>
+      <div class="side">
+        <p class="lede">Hai mươi bốn vùng đất, mỗi nơi hợp với một kiểu nghỉ khác nhau.
+          Đội ngũ TravelVN đi thử trước rồi mới đưa lên đây.</p>
+      </div>
+    </div>
+
+    <div class="mosaic">
+      <a class="dest d1 rv" href="#">
+        <div class="frame frame--hov"><img src="images/dd-hoian.jpg" alt="Dãy nhà cổ tường vàng ở Hội An với đèn lồng đỏ và xanh treo dọc hiên, trời trong xanh." width="900" height="585" loading="lazy"></div>
+        <p class="prov">Quảng Nam</p>
+        <h3>Hội An</h3>
+        <p class="meta">Phố cổ đi bộ, đèn lồng lên đèn lúc 18h · 6 tour</p>
+      </a>
+
+      <a class="dest d2 rv" style="--d:90ms" href="#">
+        <div class="frame frame--hov"><img src="images/dd-sapa.jpg" alt="Con đường ướt mưa ở Sa Pa, một người mặc áo đỏ đi giữa sương và ruộng bậc thang." width="700" height="467" loading="lazy"></div>
+        <p class="prov">Lào Cai</p>
+        <h3>Sa Pa</h3>
+        <p class="meta">Ruộng bậc thang, sương xuống sớm · 4 tour</p>
+      </a>
+
+      <a class="dest d3 rv" href="#">
+        <div class="frame frame--hov"><img src="images/dd-trangan.jpg" alt="Thuyền nan chở khách xuôi dòng Tràng An giữa những khối núi đá vôi mờ sương ở Ninh Bình." width="700" height="467" loading="lazy"></div>
+        <p class="prov">Ninh Bình</p>
+        <h3>Tràng An</h3>
+        <p class="meta">Chèo thuyền xuyên hang, đi về trong ngày · 5 tour</p>
+      </a>
+
+      <a class="dest d4 rv" style="--d:90ms" href="#">
+        <div class="frame frame--hov"><img src="images/dd-phongnha.jpg" alt="Vòm hang Phong Nha khổng lồ được chiếu sáng vàng, in bóng những mái đá xếp lớp." width="900" height="600" loading="lazy"></div>
+        <p class="prov">Quảng Bình</p>
+        <h3>Phong Nha – Kẻ Bàng</h3>
+        <p class="meta">Hệ hang động lớn bậc nhất thế giới · 3 tour</p>
+      </a>
+
+      <div class="mosaic__more">
+        <a class="ulink" href="#">Xem tất cả 24 điểm đến <span class="arw" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DẢI ẢNH TRÀN ════════════════════════════════ -->
+<section class="band">
+  <img src="images/band-halong.jpg" alt="Toàn cảnh vịnh Hạ Long từ trên đảo Ti Tốp, hàng trăm hòn đảo đá vôi nổi trên mặt nước xanh ngọc." width="1600" height="533" loading="lazy">
+  <div class="wrap band__in">
+    <p class="rv">Chúng tôi đi trước.<br><em>Bạn chỉ cần chọn.</em></p>
+    <small class="rv" style="--d:110ms">Mỗi lịch trình đều do nhân viên TravelVN đi thử,
+      ăn thử và ở thử ít nhất một lần trong 12 tháng gần nhất.</small>
+  </div>
+</section>
+
+<!-- ══ 02 TOUR ═════════════════════════════════════ -->
+<section class="sec" id="tour">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <div>
+        <p class="chapter"><span class="chapter__num">02</span><span class="chapter__rule"></span><span class="chapter__name">Tour nổi bật</span></p>
+        <h2>Lịch trình viết bởi<br>người đã đi.</h2>
+      </div>
+      <div class="side">
+        <p class="lede">Giá đã gồm xe, hướng dẫn viên, bảo hiểm và các bữa ghi trong lịch trình.
+          Không phụ phí phát sinh tại điểm.</p>
+      </div>
+    </div>
+
+    <article class="tour rv">
+      <div class="frame frame--hov tour__art">
+        <img src="images/tour-mapileng.jpg" alt="Con đường nhỏ uốn quanh sườn núi xanh thẫm trên đèo Mã Pí Lèng, Hà Giang." width="900" height="476" loading="lazy">
+      </div>
+      <div>
+        <p class="tour__code">TVN-301 <s>·</s> <s>Khởi hành thứ Sáu hàng tuần</s></p>
+        <h3>Hà Giang – Mã Pí Lèng</h3>
+        <p class="tour__desc">Ba ngày vòng cung đá: Quản Bạ, Đồng Văn, đèo Mã Pí Lèng và
+          một đêm ngủ homestay người Mông ở Lũng Cú. Đi xe 16 chỗ, chặng đèo có tài xế bản địa.</p>
+        <ul class="tour__pts">
+          <li>3 ngày 2 đêm</li><li>Tối đa 16 khách</li><li>Homestay bản địa</li><li>Có xe đón Hà Nội</li>
+        </ul>
+        <div class="tour__foot">
+          <div class="price"><b>4.290.000₫</b><small>mỗi khách · đã gồm thuế</small></div>
+          <p class="seats">Còn 6 chỗ cho 12/09</p>
+          <a class="btn btn--ink" href="#">Xem lịch trình</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="tour tour--flip rv">
+      <div class="frame frame--hov tour__art">
+        <img src="images/tour-catba.jpg" alt="Một chiếc thuyền câu đơn độc rẽ nước giữa mặt biển phẳng lặng phủ sương gần Cát Bà." width="700" height="467" loading="lazy">
+      </div>
+      <div>
+        <p class="tour__code">TVN-118 <s>·</s> <s>Khởi hành thứ Bảy</s></p>
+        <h3>Cát Bà – Vịnh Lan Hạ</h3>
+        <p class="tour__desc">Hai ngày trên vịnh: ngủ đêm trên du thuyền, chèo kayak vào áng Vẹm
+          lúc sáng sớm, ăn hải sản tại làng chài Việt Hải. Phù hợp đi cùng trẻ nhỏ.</p>
+        <ul class="tour__pts">
+          <li>2 ngày 1 đêm</li><li>Ngủ du thuyền</li><li>Kayak &amp; làng chài</li><li>Hợp gia đình</li>
+        </ul>
+        <div class="tour__foot">
+          <div class="price"><b>2.850.000₫</b><small>mỗi khách · trẻ dưới 5 tuổi miễn phí</small></div>
+          <p class="seats">Còn 11 chỗ cho 13/09</p>
+          <a class="btn btn--ink" href="#">Xem lịch trình</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="tour rv">
+      <div class="frame frame--hov tour__art">
+        <img src="images/tour-thuyenthung.jpg" alt="Người đàn ông lái chiếc thuyền thúng sơn đỏ lướt trên mặt nước xanh lục dưới chân núi đá." width="700" height="467" loading="lazy">
+      </div>
+      <div>
+        <p class="tour__code">TVN-227 <s>·</s> <s>Khởi hành hàng ngày</s></p>
+        <h3>Miền Tây – Chợ nổi Cái Răng</h3>
+        <p class="tour__desc">Dậy từ 5h ra chợ nổi lúc ghe còn đông, ăn sáng ngay trên thuyền,
+          chiều đạp xe qua vườn trái cây Phong Điền. Hai ngày chậm rãi, hợp người ngại đi bộ nhiều.</p>
+        <ul class="tour__pts">
+          <li>2 ngày 1 đêm</li><li>Đi thuyền &amp; đạp xe</li><li>Nhà vườn</li><li>Ít di chuyển</li>
+        </ul>
+        <div class="tour__foot">
+          <div class="price"><b>2.190.000₫</b><small>mỗi khách · đã gồm 3 bữa</small></div>
+          <p class="seats">Còn 8 chỗ cho 10/09</p>
+          <a class="btn btn--ink" href="#">Xem lịch trình</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ══ 03 LƯU TRÚ ══════════════════════════════════ -->
+<section class="sec" id="luutru" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <div>
+        <p class="chapter"><span class="chapter__num">03</span><span class="chapter__rule"></span><span class="chapter__name">Nơi lưu trú</span></p>
+        <h2>Phòng đã đi xem<br>tận nơi.</h2>
+      </div>
+      <div class="side">
+        <p class="lede">Giá hiển thị là giá cuối cùng, đã gồm thuế và phí dịch vụ.
+          Giữ phòng ngay, trả tiền khi nhận phòng hoặc thanh toán trước qua VNPay.</p>
+      </div>
+    </div>
+
+    <div class="stay">
+      <a class="stay__lead rv" href="#">
+        <div class="frame frame--hov"><img src="images/hotel-metropole.jpg" alt="Bể bơi khách sạn Metropole Hà Nội lúc chập tối, dãy nhà kiểu Pháp trắng phía sau được thắp đèn dây ấm." width="900" height="675" loading="lazy"></div>
+        <h3>Sofitel Legend Metropole</h3>
+        <p class="stay__meta">Hoàn Kiếm, Hà Nội · 5 sao · Bể bơi ngoài trời, spa</p>
+        <p class="stay__price"><b>6.480.000₫</b> / đêm</p>
+      </a>
+
+      <a class="stay__second rv" style="--d:100ms" href="#">
+        <div class="frame frame--hov"><img src="images/hotel-hoiana.jpg" alt="Khu nghỉ dưỡng ven biển miền Trung nhìn từ trên cao, hồ bơi uốn quanh vườn dừa mở thẳng ra bãi cát dài." width="900" height="614" loading="lazy"></div>
+        <h3>Hoiana Beach Resort</h3>
+        <p class="stay__meta">Duy Xuyên, Quảng Nam · 5 sao · Phòng hướng biển</p>
+        <p class="stay__price"><b>3.150.000₫</b> / đêm</p>
+      </a>
+
+      <div class="stay__list rv">
+        <a class="row" href="#">
+          <span class="row__name">Anantara Quy Nhơn Villas</span>
+          <span class="row__sub">Quy Nhơn, Bình Định · Villa riêng có hồ bơi</span>
+          <span class="row__price">5.900.000₫ / đêm</span>
+          <span class="row__go" aria-hidden="true">Xem phòng →</span>
+        </a>
+        <a class="row" href="#">
+          <span class="row__name">Ana Mandara Đà Lạt</span>
+          <span class="row__sub">Đà Lạt, Lâm Đồng · Biệt thự Pháp cổ trong rừng thông</span>
+          <span class="row__price">2.740.000₫ / đêm</span>
+          <span class="row__go" aria-hidden="true">Xem phòng →</span>
+        </a>
+        <a class="row" href="#">
+          <span class="row__name">Nhà Của Mây Homestay</span>
+          <span class="row__sub">Đồng Văn, Hà Giang · Nhà trình tường, bữa sáng gia đình</span>
+          <span class="row__price">680.000₫ / đêm</span>
+          <span class="row__go" aria-hidden="true">Xem phòng →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 04 ẨM THỰC (dải tối) ════════════════════════ -->
+<section class="sec dark" id="amthuc">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <div>
+        <p class="chapter"><span class="chapter__num">04</span><span class="chapter__rule"></span><span class="chapter__name">Ẩm thực</span></p>
+        <h2>Đặt bàn trước.<br>Khỏi đứng đợi.</h2>
+      </div>
+      <div class="side">
+        <p class="lede">Giữ bàn miễn phí tại hơn 180 nhà hàng. Chọn luôn món khi đặt tour
+          để bếp chuẩn bị trước cho đoàn đông.</p>
+      </div>
+    </div>
+
+    <div class="dine">
+      <div class="dine__tall rv">
+        <div class="frame frame--hov">
+          <img src="images/nh-bordeaux.jpg" alt="Góc phòng ăn ấm ánh đèn vàng, chiếc đèn gốm hoa lam Việt đặt cạnh xe đẩy rượu vang." width="700" height="1050" loading="lazy">
+        </div>
+        <p class="cap">Le Bordeaux, Quận 3, TP.HCM</p>
+      </div>
+
+      <div class="dine__body">
+        <div class="dine__sq rv" style="--d:80ms">
+          <div class="frame frame--hov">
+            <img src="images/nh-pho.jpg" alt="Tô phở bò nóng với hành lá và giá đỗ, đôi đũa gác ngang, đặt trên mặt bàn gỗ sẫm." width="700" height="467" loading="lazy">
+          </div>
+          <p class="cap">Phở gia truyền · mở từ 6h</p>
+        </div>
+
+        <div class="dine__list rv" style="--d:130ms">
+          <a class="row" href="#">
+            <span class="row__name">Phở Thìn Bờ Hồ</span>
+            <span class="row__sub">Hoàn Kiếm, Hà Nội · Phở bò · 6h – 21h</span>
+            <span class="row__price">80.000₫ / người</span>
+            <span class="row__go" aria-hidden="true">Giữ bàn →</span>
+          </a>
+          <a class="row" href="#">
+            <span class="row__name">Nhà hàng Cơm Niêu Sài Gòn</span>
+            <span class="row__sub">Quận 3, TP.HCM · Món Việt · 10h – 22h</span>
+            <span class="row__price">250.000₫ / người</span>
+            <span class="row__go" aria-hidden="true">Giữ bàn →</span>
+          </a>
+          <a class="row" href="#">
+            <span class="row__name">Bánh Mì Phượng</span>
+            <span class="row__sub">Hội An, Quảng Nam · Ăn nhanh · 6h30 – 21h30</span>
+            <span class="row__price">45.000₫ / người</span>
+            <span class="row__go" aria-hidden="true">Giữ bàn →</span>
+          </a>
+          <a class="row" href="#">
+            <span class="row__name">Madam Lân</span>
+            <span class="row__sub">Hải Châu, Đà Nẵng · Món Việt ba miền · 6h – 22h</span>
+            <span class="row__price">190.000₫ / người</span>
+            <span class="row__go" aria-hidden="true">Giữ bàn →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ KHÁCH KỂ LẠI ════════════════════════════════ -->
+<section class="sec" id="khachnoi">
+  <div class="wrap">
+    <div class="voices">
+      <div class="voices__art rv">
+        <div class="frame frame--hov">
+          <img src="images/chandung-cantho.jpg" alt="Người phụ nữ đội nón lá ngồi trên ghe bán hàng ở chợ nổi miền Tây, phía sau là dãy nhà ven sông." width="700" height="467" loading="lazy">
+        </div>
+        <p class="cap">Chợ nổi Cái Răng, Cần Thơ</p>
+      </div>
+
+      <div class="voices__lead rv" style="--d:90ms">
+        <p class="chapter"><span class="chapter__num">05</span><span class="chapter__rule"></span><span class="chapter__name">Khách kể lại</span></p>
+        <blockquote class="quote quote--big">“Mẹ mình 68 tuổi, tự vào đặt tour Ninh Bình
+          rồi gọi khoe. Trước giờ toàn phải nhờ con cháu đặt hộ.”</blockquote>
+        <p class="who"><b>Nguyễn Thu Hà</b> · Hà Nội · Tour TVN-204, tháng 7</p>
+      </div>
+
+      <div class="voices__pair">
+        <div class="rv">
+          <p class="quote">“Đặt tour Hà Giang lúc 11h đêm, 8h sáng hôm sau có người gọi xác nhận
+            kèm số xe và tên tài xế. Không phải hỏi lại câu nào.”</p>
+          <p class="who"><b>Trần Minh Quân</b> · TP.HCM</p>
+        </div>
+        <div class="rv" style="--d:90ms">
+          <p class="quote">“Giá trên web đúng bằng giá cuối cùng phải trả. Đi bốn chuyến rồi,
+            chưa lần nào phát sinh thêm ở điểm.”</p>
+          <p class="who"><b>Lê Thị Bích Ngọc</b> · Đà Nẵng</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA CUỐI ════════════════════════════════════ -->
+<section class="cta dark" id="dat">
+  <div class="wrap cta__in">
+    <h2 class="rv">Chuyến đi tiếp theo<br>bắt đầu <em>ở đây.</em></h2>
+    <p class="lede rv" style="--d:100ms">
+      Chọn điểm đến, ngày đi và số khách. Hệ thống ghép sẵn tour, phòng và bàn ăn
+      thành một đơn duy nhất để bạn xem trước khi trả tiền.
+    </p>
+    <div class="cta__btns rv" style="--d:180ms">
+      <a class="btn btn--gold" href="#">Bắt đầu đặt chuyến <span aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" href="#">Nhận tư vấn qua Zalo</a>
+    </div>
+    <div class="trust rv" style="--d:260ms">
+      <span><i class="dot"></i>Thanh toán VNPay &amp; thẻ nội địa</span>
+      <span><i class="dot"></i>Hoàn 100% nếu huỷ trước 7 ngày</span>
+      <span><i class="dot"></i>Hỗ trợ 7h – 22h mỗi ngày</span>
+      <span><i class="dot"></i>Giấy phép lữ hành nội địa 01-234/GPLHNĐ</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ CHÂN TRANG ══════════════════════════════════ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="mark" href="#">Travel<span>VN</span></a>
+        <p class="foot__blurb">Công ty lữ hành nội địa. Tour, khách sạn và nhà hàng
+          trong một hệ thống đặt chỗ duy nhất.</p>
+      </div>
+      <div>
+        <h4>Dịch vụ</h4>
+        <ul>
+          <li><a href="#tour">Tour trọn gói</a></li>
+          <li><a href="#luutru">Đặt phòng khách sạn</a></li>
+          <li><a href="#amthuc">Giữ bàn nhà hàng</a></li>
+          <li><a href="#">Thuê xe &amp; đưa đón</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hỗ trợ</h4>
+        <ul>
+          <li><a href="#">Tra cứu đơn hàng</a></li>
+          <li><a href="#">Chính sách huỷ &amp; hoàn tiền</a></li>
+          <li><a href="#">Hướng dẫn thanh toán VNPay</a></li>
+          <li><a href="#">Câu hỏi thường gặp</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="tel:+842471000000">024 7100 0000</a></li>
+          <li><a href="mailto:hotro@travelvn.vn">hotro@travelvn.vn</a></li>
+          <li>Số 12 Lý Thường Kiệt,<br>Hoàn Kiếm, Hà Nội</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>© 2026 TravelVN. Giấy phép lữ hành nội địa 01-234/GPLHNĐ.</span>
+      <span>Bản concept thiết kế — dữ liệu và hình ảnh chỉ mang tính minh hoạ.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* nền thanh điều hướng khi cuộn */
+  var nav = document.getElementById('nav');
+  var onScroll = function () { nav.classList.toggle('is-stuck', scrollY > 40); };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* hiện dần khi cuộn tới */
+  var items = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('is-in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>

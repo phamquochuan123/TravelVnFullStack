@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status *)",
+      "Bash(grep -iE \"travel/\\\\.env|travel\\\\\\\\\\\\\\\\\\\\.env\")",
+      "Bash(git config *)",
+      "Bash(gh api *)",
+      "Bash(xargs -I{} sh -c 'echo ==={}===; cat {}')",
+      "Bash(./gradlew compileJava --no-daemon -q)",
+      "Bash(./gradlew compileJava --no-daemon)"
+    ]
+  }
+}
